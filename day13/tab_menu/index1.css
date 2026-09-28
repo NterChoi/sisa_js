@@ -1,0 +1,45 @@
+.container {
+  background-color: #fff;
+  width: 460px;
+  padding: 16px;
+  border: 1px solid #dddde1;
+  border-radius: 11px;
+  display: flex;
+  flex-direction: column;
+}
+
+.nav {
+  display: flex;
+  gap: 6px;
+  border-bottom: 1px solid #e1e1e4;
+}
+
+.btn {
+  width: 100%;
+  height: 38px;
+  padding: 0 14px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  border: 1px solid #d5d5da;
+}
+
+.active {
+  background-color: #1c1c1c;
+  color: white;
+}
+
+.main {
+  font-size: 15px;
+  color: #44444c;
+}
+
+.desc,
+.review,
+.inquiry {
+  display: none;
+}
+
+.show {
+  display: block;
+}

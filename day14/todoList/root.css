@@ -1,0 +1,11 @@
+:root {
+  --desk: #eef1f6; /* 바탕(모눈 노트) */
+  --grid: #e1e6ef; /* 모눈 선 */
+  --paper: #ffffff;
+  --ink: #1c2333; /* 글자 */
+  --muted: #8b94a7; /* 보조 글자 */
+  --rule: #e8ebf2; /* 줄 */
+  --pen: #2445b8; /* 볼펜 파랑 — 체크·진행·포커스 */
+  --pen-soft: #e6ecfb;
+  --red: #d6364b; /* 지우기 */
+}

@@ -1,0 +1,17 @@
+section {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+}
+
+.card {
+  height: 150px;
+  width: 100px;
+  border: 1px solid black;
+  border-radius: 20px;
+}
+
+.imgWrapper {
+  height: 100%;
+  width: 100%;
+}

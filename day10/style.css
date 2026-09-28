@@ -1,0 +1,841 @@
+/* =====================================================
+   모눈상점 스타일시트
+   1. 변수   2. 초기화   3. 공통   4. 헤더   5. 히어로
+   6. 상품 목록   7. CSS 일러스트   8. 배송 안내
+   9. 뉴스레터   10. 푸터   11. 반응형
+   ===================================================== */
+
+/* ---------- 1. 변수 (색상, 글꼴을 한곳에서 관리) ---------- */
+:root {
+  --paper: #f7f8fa; /* 배경: 차가운 종이색 */
+  --white: #ffffff;
+  --ink: #1f2a5a; /* 메인: 잉크 남색 */
+  --ink-hover: #2e3d7a;
+  --ink-soft: #5b6478; /* 보조 글자 */
+  --grid: #dce3ef; /* 모눈 선 */
+  --line: #e3e7ee; /* 구분선 */
+  --marker: #f4e04d; /* 포인트: 형광펜 노랑 */
+  --red: #d4483b; /* 할인 */
+
+  --font-title: "Gowun Batang", serif;
+  --font-body: "IBM Plex Sans KR", system-ui, sans-serif;
+
+  --radius: 12px;
+  --container: 1120px;
+}
+
+/* ---------- 2. 초기화 ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--ink);
+  background: var(--paper);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+img {
+  display: block;
+  max-width: 100%;
+}
+button,
+input,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+/* 키보드로 이동할 때 보이는 테두리 */
+:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 3px;
+}
+
+/* ---------- 3. 공통 ---------- */
+.container {
+  width: 100%;
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* 화면에서는 숨기고 스크린리더만 읽게 하는 클래스 */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 48px;
+  padding: 0 24px;
+  border: 1.5px solid var(--ink);
+  border-radius: 999px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background-color 0.2s,
+    border-color 0.2s;
+}
+
+.btn-primary {
+  background: var(--ink);
+  color: var(--white);
+}
+.btn-primary:hover {
+  background: var(--ink-hover);
+  border-color: var(--ink-hover);
+}
+
+.btn-outline {
+  background: var(--white);
+  color: var(--ink);
+}
+.btn-outline:hover {
+  background: var(--marker);
+}
+
+.section-title {
+  font-family: var(--font-title);
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+}
+
+.section-desc {
+  margin-top: 6px;
+  color: var(--ink-soft);
+}
+
+/* ---------- 4. 헤더 ---------- */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: rgba(247, 248, 250, 0.92);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--line);
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  height: 68px;
+}
+
+.logo {
+  font-family: var(--font-title);
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.main-nav ul {
+  display: flex;
+  gap: 28px;
+}
+
+.main-nav a {
+  padding: 2px 0;
+  font-size: 15px;
+  color: var(--ink-soft);
+}
+
+.main-nav a:hover {
+  color: var(--ink);
+}
+
+/* 현재 메뉴: 형광펜으로 그은 듯한 밑줄 */
+.main-nav a.is-active {
+  color: var(--ink);
+  font-weight: 500;
+  box-shadow: inset 0 -8px 0 var(--marker);
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-left: auto;
+  font-size: 15px;
+}
+
+.cart-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 600;
+}
+
+.cart-count {
+  display: inline-grid;
+  place-items: center;
+  min-width: 22px;
+  height: 22px;
+  padding: 0 6px;
+  border-radius: 999px;
+  background: var(--marker);
+  font-size: 12px;
+}
+
+/* ---------- 5. 히어로 ---------- */
+/* 모눈종이 배경: 가로선 + 세로선 그라디언트 두 겹 */
+.hero {
+  background-color: var(--paper);
+  background-image:
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: 24px 24px;
+  border-bottom: 1px solid var(--line);
+}
+
+.hero-inner {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  align-items: center;
+  gap: 48px;
+  padding-top: 88px;
+  padding-bottom: 88px;
+}
+
+.hero-title {
+  font-family: var(--font-title);
+  font-size: clamp(2.25rem, 5vw, 3.75rem);
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.03em;
+}
+
+.hero-desc {
+  max-width: 28em;
+  margin-top: 20px;
+  font-size: 17px;
+  color: var(--ink-soft);
+}
+
+.hero-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 32px;
+}
+
+/* 노트 그림 무대: em 단위라서 font-size만 바꾸면 통째로 커지고 작아짐 */
+.hero-visual {
+  position: relative;
+  justify-self: center;
+  width: 26em;
+  height: 20em;
+  font-size: 16px;
+}
+
+.hero-visual .art {
+  position: absolute;
+}
+
+.hero-book-1 {
+  left: 4%;
+  top: 14%;
+  transform: rotate(-12deg);
+}
+.hero-book-2 {
+  left: 30%;
+  top: 4%;
+  transform: rotate(-2deg);
+}
+.hero-book-3 {
+  left: 56%;
+  top: 16%;
+  transform: rotate(9deg);
+}
+.hero-pen {
+  left: 46%;
+  top: 6%;
+  transform: rotate(58deg);
+}
+
+/* ---------- 6. 상품 목록 ---------- */
+.products {
+  padding: 88px 0;
+}
+
+.section-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 24px;
+  margin-bottom: 36px;
+}
+
+.sort select {
+  height: 40px;
+  padding: 0 38px 0 16px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--white)
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%231F2A5A' stroke-width='1.6'/%3E%3C/svg%3E")
+    no-repeat right 16px center;
+  font-size: 14px;
+  appearance: none;
+  cursor: pointer;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 44px 24px;
+}
+
+.product {
+  display: flex;
+  flex-direction: column;
+}
+
+/* 상품 사진 영역: 옅은 모눈 배경 */
+.product-thumb {
+  --thumb-bg: #eef2f8;
+  position: relative;
+  display: grid;
+  place-items: center;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  border-radius: var(--radius);
+  background-color: var(--thumb-bg);
+  background-image:
+    linear-gradient(rgba(31, 42, 90, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(31, 42, 90, 0.06) 1px, transparent 1px);
+  background-size: 16px 16px;
+  font-size: 16px;
+}
+
+/* 실제 이미지를 넣었을 때 */
+.product-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* 마우스를 올리면 그림이 살짝 떠오름
+   (transform 대신 translate 속성을 써서 기존 회전값과 충돌하지 않게) */
+.product-thumb .art {
+  transition: translate 0.3s ease;
+}
+.product-thumb:hover .art {
+  translate: 0 -6px;
+}
+
+.badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: var(--marker);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.badge-sale {
+  background: var(--red);
+  color: var(--white);
+}
+
+.product-info {
+  flex: 1;
+  padding-top: 16px;
+}
+
+.product-name {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.product-name a:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.product-desc {
+  margin-top: 4px;
+  font-size: 14px;
+  color: var(--ink-soft);
+}
+
+.product-price {
+  margin-top: 10px;
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.product-price del {
+  margin-right: 6px;
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--ink-soft);
+}
+
+.product-price .sale {
+  color: var(--red);
+}
+
+.btn-cart {
+  height: 42px;
+  margin-top: 14px;
+  border: 1.5px solid var(--ink);
+  border-radius: 999px;
+  background: transparent;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background-color 0.2s,
+    color 0.2s;
+}
+
+.btn-cart:hover {
+  background: var(--ink);
+  color: var(--white);
+}
+
+/* ---------- 7. CSS 일러스트 (이미지 대신 쓰는 그림) ---------- */
+/* 모든 크기가 em 단위라서 부모 font-size를 따라 커지고 작아짐 */
+.art {
+  position: relative;
+  display: block;
+  flex-shrink: 0;
+}
+
+.art-lg {
+  font-size: 1.8em;
+}
+
+/* 표지 색상 */
+.color-navy {
+  --art: #1f2a5a;
+}
+.color-yellow {
+  --art: #f4e04d;
+}
+.color-red {
+  --art: #d4483b;
+}
+.color-green {
+  --art: #3e7b63;
+}
+
+/* 노트 */
+.art-notebook {
+  width: 6em;
+  height: 8em;
+  border-radius: 0.25em 0.6em 0.6em 0.25em;
+  background: var(--art, #1f2a5a);
+  box-shadow:
+    inset 0.5em 0 0 rgba(0, 0, 0, 0.14),
+    /* 책등 그림자 */ 0 0.5em 1em rgba(31, 42, 90, 0.14);
+}
+
+/* 노트 표지의 흰 라벨 */
+.art-notebook::before {
+  content: "";
+  position: absolute;
+  top: 1.4em;
+  left: 1.2em;
+  right: 1.6em;
+  height: 1.6em;
+  border-radius: 0.15em;
+  background: rgba(255, 255, 255, 0.9);
+}
+
+/* 노트 고무 밴드 */
+.art-notebook::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0.9em;
+  width: 0.35em;
+  background: rgba(0, 0, 0, 0.28);
+}
+
+/* 스프링 플래너: 노트를 바탕으로 고무 밴드 대신 스프링을 그림
+   (.art-notebook 규칙보다 아래에 있어야 덮어씀) */
+.art-planner {
+  box-shadow: 0 0.5em 1em rgba(31, 42, 90, 0.14);
+}
+.art-planner::after {
+  top: 0.4em;
+  bottom: 0.4em;
+  right: auto;
+  left: -0.35em;
+  width: 0.7em;
+  border-radius: 0.2em;
+  background: repeating-linear-gradient(
+    to bottom,
+    #9aa3b5 0 0.3em,
+    transparent 0.3em 0.8em
+  );
+}
+
+/* 펜: 뚜껑색 / 흰 띠 / 몸통 / 펜촉 순서의 그라디언트 */
+.art-pen,
+.art-pens,
+.art-pens::before,
+.art-pens::after {
+  width: 0.8em;
+  height: 9em;
+  border-radius: 0.4em 0.4em 0.15em 0.15em;
+  background: linear-gradient(
+    to bottom,
+    var(--pen, #1f2a5a) 0 30%,
+    #ffffff 30% 32%,
+    #e6eaf1 32% 90%,
+    #9aa3b5 90%
+  );
+  box-shadow: inset -0.15em 0 0 rgba(0, 0, 0, 0.08);
+}
+
+/* 펜 3개 세트: 가운데는 본체, 양옆은 ::before, ::after */
+.art-pens {
+  --p1: #1f2a5a;
+  --pen: #2f55b3;
+  --p3: #d4483b;
+  transform: rotate(8deg);
+}
+
+.art-pens::before,
+.art-pens::after {
+  content: "";
+  position: absolute;
+}
+.art-pens::before {
+  left: -1.6em;
+  top: 0.6em;
+  --pen: var(--p1);
+}
+.art-pens::after {
+  left: 1.6em;
+  top: -0.4em;
+  --pen: var(--p3);
+}
+
+/* 형광펜: 펜 세트에서 색과 굵기만 바꿈 */
+.art-pens.pastel {
+  --p1: #f2a7b5;
+  --pen: #f4e04d;
+  --p3: #9ed4b8;
+  transform: rotate(-8deg);
+}
+.art-pens.pastel,
+.art-pens.pastel::before,
+.art-pens.pastel::after {
+  width: 1.2em;
+  height: 7.5em;
+}
+.art-pens.pastel::before {
+  left: -2em;
+}
+.art-pens.pastel::after {
+  left: 2em;
+}
+
+/* 떡메모지: 줄무늬 + 여러 겹 그림자로 쌓인 느낌 */
+.art-memo {
+  width: 6.5em;
+  height: 6.5em;
+  background:
+    repeating-linear-gradient(
+      to bottom,
+      transparent 0 1.1em,
+      rgba(31, 42, 90, 0.12) 1.1em calc(1.1em + 1px)
+    ),
+    #fff3a6;
+  box-shadow:
+    0.3em 0.3em 0 #f1e07a,
+    0.6em 0.6em 0 #e6d25e;
+  transform: rotate(-5deg);
+}
+
+/* 마스킹테이프: 가운데 구멍(radial) + 줄무늬(conic) */
+.art-tape {
+  width: 7em;
+  height: 7em;
+  margin-left: -2em;
+  border-radius: 50%;
+  background:
+    radial-gradient(
+      circle,
+      var(--thumb-bg, #eef2f8) 0 1.8em,
+      #ffffff 1.8em 2.2em,
+      transparent 2.2em
+    ),
+    repeating-conic-gradient(#f2a7b5 0 15deg, #f8c9d2 15deg 30deg);
+  box-shadow: 0 0.5em 1em rgba(31, 42, 90, 0.14);
+}
+
+/* 옆에 놓인 작은 테이프 */
+.art-tape::after {
+  content: "";
+  position: absolute;
+  right: -3.2em;
+  bottom: -0.8em;
+  width: 4.5em;
+  height: 4.5em;
+  border-radius: 50%;
+  background:
+    radial-gradient(
+      circle,
+      var(--thumb-bg, #eef2f8) 0 1.1em,
+      #ffffff 1.1em 1.4em,
+      transparent 1.4em
+    ),
+    repeating-conic-gradient(#8fb3e0 0 15deg, #b9cfec 15deg 30deg);
+  box-shadow: 0 0.4em 0.8em rgba(31, 42, 90, 0.14);
+}
+
+/* 파우치 */
+.art-pouch {
+  width: 9em;
+  height: 5.5em;
+  border-radius: 1em;
+  background: var(--art, #3e7b63);
+  box-shadow:
+    inset 0 -0.6em 0 rgba(0, 0, 0, 0.08),
+    0 0.5em 1em rgba(31, 42, 90, 0.14);
+}
+
+/* 지퍼 */
+.art-pouch::before {
+  content: "";
+  position: absolute;
+  top: 1em;
+  left: 0.9em;
+  right: 0.9em;
+  height: 0.25em;
+  background: repeating-linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.7) 0 0.3em,
+    transparent 0.3em 0.5em
+  );
+}
+
+/* 지퍼 손잡이 */
+.art-pouch::after {
+  content: "";
+  position: absolute;
+  top: 0.7em;
+  right: 0.6em;
+  width: 0.5em;
+  height: 1.4em;
+  border-radius: 0.2em;
+  background: #c9cfdb;
+}
+
+/* ---------- 8. 배송 안내 ---------- */
+.notice {
+  padding: 56px 0;
+  background: var(--ink);
+  color: var(--white);
+}
+
+.notice-inner {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+}
+
+.notice-item h3 {
+  font-family: var(--font-title);
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.notice-item p {
+  margin-top: 6px;
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+/* ---------- 9. 뉴스레터 ---------- */
+.newsletter {
+  padding: 88px 0;
+}
+
+.newsletter-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 32px;
+}
+
+.newsletter-form {
+  display: flex;
+  gap: 8px;
+}
+
+.newsletter-form input {
+  width: 300px;
+  height: 48px;
+  padding: 0 20px;
+  border: 1.5px solid var(--line);
+  border-radius: 999px;
+  background: var(--white);
+}
+
+.newsletter-form input:focus {
+  border-color: var(--ink);
+  outline: none;
+}
+
+/* ---------- 10. 푸터 ---------- */
+.site-footer {
+  padding: 48px 0;
+  border-top: 1px solid var(--line);
+  background: var(--white);
+}
+
+.footer-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.footer-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.footer-links {
+  display: flex;
+  gap: 20px;
+  font-size: 14px;
+}
+
+.footer-links a:hover {
+  text-decoration: underline;
+}
+
+.footer-info,
+.copyright {
+  font-size: 13px;
+  color: var(--ink-soft);
+}
+
+/* ---------- 11. 반응형 ---------- */
+/* 태블릿 */
+@media (max-width: 960px) {
+  .hero-inner {
+    grid-template-columns: 1fr;
+    padding-top: 64px;
+    padding-bottom: 64px;
+  }
+
+  .product-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .newsletter-inner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+/* 모바일 */
+@media (max-width: 720px) {
+  .header-inner {
+    flex-wrap: wrap;
+    height: auto;
+    padding-top: 14px;
+    gap: 12px 24px;
+  }
+
+  /* 메뉴를 로고 아래 한 줄로 내리고 가로 스크롤 */
+  .main-nav {
+    order: 3;
+    width: 100%;
+    overflow-x: auto;
+  }
+  .main-nav ul {
+    gap: 22px;
+    padding-bottom: 12px;
+    white-space: nowrap;
+  }
+
+  .header-link {
+    display: none;
+  }
+
+  .hero-visual {
+    font-size: 12px;
+  }
+
+  .section-head {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .product-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px 16px;
+  }
+
+  .product-thumb {
+    font-size: 11px;
+  }
+
+  .notice-inner {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .newsletter-form {
+    flex-direction: column;
+    width: 100%;
+  }
+  .newsletter-form input {
+    width: 100%;
+  }
+}
+
+/* 움직임 줄이기 설정을 켠 사용자에게는 애니메이션 끄기 */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition: none !important;
+  }
+}

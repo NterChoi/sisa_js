@@ -1,0 +1,271 @@
+/* ── 색 — 모눈 노트 위에 볼펜 파랑 하나 ── */
+:root {
+  --desk: #eef1f6; /* 바탕(모눈 노트) */
+  --grid: #e1e6ef; /* 모눈 선 */
+  --paper: #ffffff;
+  --ink: #1c2333; /* 글자 */
+  --muted: #8b94a7; /* 보조 글자 */
+  --rule: #e8ebf2; /* 줄 */
+  --pen: #2445b8; /* 볼펜 파랑 — 체크·진행·포커스 */
+  --pen-soft: #e6ecfb;
+  --red: #d6364b; /* 지우기 */
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* display 를 준 요소라도 hidden 속성이 붙으면 확실히 숨긴다 */
+[hidden] {
+  display: none !important;
+}
+
+body {
+  font-family: "Pretendard Variable", Pretendard, system-ui, sans-serif;
+  color: var(--ink);
+  background-color: var(--desk);
+  background-image:
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: 24px 24px;
+  padding: 40px 16px;
+  -webkit-font-smoothing: antialiased;
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+}
+
+/* 키보드로 옮겨 다닐 때만 파란 테두리 */
+:focus-visible {
+  outline: 2px solid var(--pen);
+  outline-offset: 2px;
+}
+
+.app {
+  max-width: 440px;
+  margin: 0 auto;
+  background: var(--paper);
+  border-radius: 20px;
+  box-shadow:
+    0 1px 0 #d8deea,
+    0 20px 40px -28px rgba(28, 35, 51, 0.45);
+  padding: 28px 24px 14px;
+}
+
+/* ── 머리: 날짜 · 제목 · 진행 ── */
+.head__date {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--muted);
+}
+.head__title {
+  font-size: 30px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin-top: 2px;
+}
+.head__progress {
+  margin-top: 18px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--pen);
+  font-variant-numeric: tabular-nums;
+}
+.bar {
+  margin-top: 8px;
+  height: 6px;
+  border-radius: 99px;
+  background: var(--pen-soft);
+  overflow: hidden;
+}
+.bar__fill {
+  display: block;
+  width: 0;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--pen);
+  transition: width 0.35s ease; /* 체크하면 막대가 스르륵 찬다 */
+}
+
+/* ── 입력 ── */
+.add {
+  display: flex;
+  gap: 8px;
+  margin-top: 24px;
+}
+.add__input {
+  flex: 1;
+  min-width: 0;
+  font: inherit;
+  font-size: 16px; /* 16px 보다 작으면 아이폰이 화면을 확대해버린다 */
+  padding: 12px 14px;
+  border: 1.5px solid var(--rule);
+  border-radius: 12px;
+  background: #f7f8fb;
+  color: var(--ink);
+}
+.add__input::placeholder {
+  color: var(--muted);
+}
+.add__input:focus {
+  outline: none;
+  border-color: var(--pen);
+  background: #fff;
+}
+.add__btn {
+  flex: none;
+  padding: 0 18px;
+  border: 0;
+  border-radius: 12px;
+  background: var(--pen);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 700;
+}
+.add__btn:disabled {
+  background: var(--pen-soft);
+  color: #9aa8d6;
+  cursor: not-allowed;
+}
+
+/* ── 보기 탭 — 지금 탭은 aria-pressed="true" ── */
+.filters {
+  display: flex;
+  gap: 4px;
+  margin-top: 20px;
+  padding: 4px;
+  border-radius: 12px;
+  background: #f1f3f8;
+}
+.filters button {
+  flex: 1;
+  padding: 8px 0;
+  border: 0;
+  border-radius: 9px;
+  background: none;
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 600;
+}
+.filters button[aria-pressed="true"] {
+  background: var(--paper);
+  color: var(--ink);
+  box-shadow: 0 1px 2px rgba(28, 35, 51, 0.14);
+}
+
+/* ── 목록 ── */
+.list {
+  list-style: none;
+  margin-top: 8px;
+}
+.item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  border-bottom: 1px solid var(--rule);
+}
+.item__label {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: flex-start; /* 두 줄로 꺾여도 체크박스는 첫 줄에 */
+  gap: 12px;
+  padding: 14px 4px;
+  cursor: pointer; /* 글자를 눌러도 체크된다(label 이 감싸서) */
+}
+.item__check {
+  flex: none;
+  width: 20px;
+  height: 20px;
+  margin-top: 2px;
+  accent-color: var(--pen); /* 체크박스 색은 이 한 줄이면 된다 */
+  cursor: pointer;
+}
+.item__text {
+  font-size: 16px;
+  line-height: 1.45;
+  word-break: keep-all; /* 한글을 글자 중간이 아니라 띄어쓰기에서 꺾는다 */
+  overflow-wrap: anywhere; /* 띄어쓰기 없는 긴 영어·주소는 그래도 꺾는다 */
+}
+
+/* 끝낸 일 — JS 는 li 에 done 클래스만 붙인다 */
+.item.done .item__text {
+  color: var(--muted);
+  text-decoration-line: line-through;
+  text-decoration-color: var(--pen);
+  text-decoration-thickness: 2px;
+}
+
+.item__del {
+  flex: none;
+  width: 36px;
+  height: 36px;
+  border: 0;
+  border-radius: 10px;
+  background: none;
+  color: #b7becc;
+  font-size: 15px;
+}
+.item__del:hover {
+  color: var(--red);
+  background: #fdecee;
+}
+
+/* 마우스가 있는 화면에서만 숨겼다가 올리면 보인다 — 폰엔 hover 가 없으니 늘 보인다 */
+@media (hover: hover) {
+  .item__del {
+    opacity: 0;
+  }
+  .item:hover .item__del,
+  .item:has(:focus-visible) .item__del {
+    opacity: 1;
+  } /* 키보드로 그 줄에 왔을 때도 */
+}
+
+/* ── 비었을 때 ── */
+.empty {
+  padding: 40px 0 30px;
+  text-align: center;
+}
+.empty__title {
+  font-size: 16px;
+  font-weight: 700;
+}
+.empty__sub {
+  margin-top: 4px;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+/* ── 바닥 ── */
+.foot {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 10px;
+}
+.foot__clear {
+  padding: 6px 4px;
+  border: 0;
+  background: none;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 600;
+}
+.foot__clear:hover:not(:disabled) {
+  color: var(--red);
+}
+.foot__clear:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+/* 움직임을 줄여달라고 한 사람에겐 막대도 바로 */
+@media (prefers-reduced-motion: reduce) {
+  .bar__fill {
+    transition: none;
+  }
+}

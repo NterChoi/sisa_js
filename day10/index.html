@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>모눈상점 - 매일 쓰는 문구</title>
+
+    <!-- 웹폰트: 제목용 고운바탕, 본문용 IBM Plex Sans KR -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=IBM+Plex+Sans+KR:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <script src="./index.js" defer></script>
+  </head>
+  <body>
+    <!-- ========== 헤더 ========== -->
+    <header class="site-header">
+      <div class="container header-inner">
+        <a href="#" class="logo">모눈상점</a>
+
+        <nav class="main-nav" aria-label="주요 메뉴">
+          <ul>
+            <li><a href="#products" class="is-active">전체 상품</a></li>
+            <li><a href="#">노트</a></li>
+            <li><a href="#">필기구</a></li>
+            <li><a href="#">데코</a></li>
+            <li><a href="#">파우치</a></li>
+          </ul>
+        </nav>
+
+        <div class="header-actions">
+          <a href="#" class="header-link">로그인</a>
+          <a href="#" class="cart-link">
+            장바구니
+            <span class="cart-count" aria-label="담은 상품 2개">2</span>
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <!-- ========== 메인 배너 (히어로) ========== -->
+      <section class="hero">
+        <div class="container hero-inner">
+          <div class="hero-text">
+            <h1 class="hero-title">한 칸씩 채워 가는<br />하루를 위한 문구</h1>
+            <p class="hero-desc">
+              오래 써도 질리지 않는 노트와 펜, 손이 자주 가는 메모지를 골라
+              두었어요.
+            </p>
+            <div class="hero-buttons">
+              <a href="#products" class="btn btn-primary">상품 둘러보기</a>
+              <a href="#" class="btn btn-outline">2027 플래너 보기</a>
+            </div>
+          </div>
+
+          <!-- CSS로만 그린 노트 그림 (장식이라 스크린리더에서는 숨김) -->
+          <div class="hero-visual" aria-hidden="true">
+            <span
+              class="art art-notebook art-lg color-green hero-book-1"
+            ></span>
+            <span
+              class="art art-notebook art-lg color-yellow hero-book-2"
+            ></span>
+            <span class="art art-notebook art-lg color-navy hero-book-3"></span>
+            <span class="art art-pen art-lg hero-pen"></span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========== 상품 목록 ========== -->
+      <section class="products" id="products">
+        <div class="container">
+          <div class="section-head">
+            <div>
+              <h2 class="section-title">지금 많이 찾는 상품</h2>
+              <p class="section-desc">
+                지난 한 주 동안 장바구니에 가장 많이 담긴 상품이에요.
+              </p>
+            </div>
+            <label class="sort">
+              <span class="sr-only">정렬 기준</span>
+              <select>
+                <option>인기순</option>
+                <option>신상품순</option>
+                <option>낮은 가격순</option>
+                <option>높은 가격순</option>
+              </select>
+            </label>
+          </div>
+
+          <div class="product-grid">
+            <!-- 상품 1 -->
+            <article class="product">
+              <a
+                href="#"
+                class="product-thumb"
+                aria-label="모눈 노트 A5 자세히 보기"
+              >
+                <!-- 실제 사진을 쓸 땐 아래 span 대신: <img src="images/note-a5.jpg" alt=""> -->
+                <span class="art art-notebook color-navy"></span>
+                <span class="badge">새 상품</span>
+              </a>
+              <div class="product-info">
+                <h3 class="product-name"><a href="#">모눈 노트 A5</a></h3>
+                <p class="product-desc">5mm 모눈, 120쪽</p>
+                <p class="product-price">8,500원</p>
+              </div>
+              <button type="button" class="btn-cart">장바구니 담기</button>
+            </article>
+
+            <!-- 상품 2 -->
+            <article class="product">
+              <a
+                href="#"
+                class="product-thumb"
+                aria-label="무지 노트 B6 자세히 보기"
+              >
+                <span class="art art-notebook color-yellow"></span>
+              </a>
+              <div class="product-info">
+                <h3 class="product-name"><a href="#">무지 노트 B6</a></h3>
+                <p class="product-desc">가방에 쏙 들어가는 크기</p>
+                <p class="product-price">6,000원</p>
+              </div>
+              <button type="button" class="btn-cart">장바구니 담기</button>
+            </article>
+
+            <!-- 상품 3 -->
+            <article class="product">
+              <a
+                href="#"
+                class="product-thumb"
+                aria-label="0.5 젤펜 3색 세트 자세히 보기"
+              >
+                <span class="art art-pens"></span>
+              </a>
+              <div class="product-info">
+                <h3 class="product-name"><a href="#">0.5 젤펜 3색 세트</a></h3>
+                <p class="product-desc">검정, 파랑, 빨강</p>
+                <p class="product-price">4,500원</p>
+              </div>
+              <button type="button" class="btn-cart">장바구니 담기</button>
+            </article>
+
+            <!-- 상품 4 -->
+            <article class="product">
+              <a
+                href="#"
+                class="product-thumb"
+                aria-label="파스텔 형광펜 3종 자세히 보기"
+              >
+                <span class="art art-pens pastel"></span>
+              </a>
+              <div class="product-info">
+                <h3 class="product-name"><a href="#">파스텔 형광펜 3종</a></h3>
+                <p class="product-desc">뒷면에 비치지 않는 수성 잉크</p>
+                <p class="product-price">5,500원</p>
+              </div>
+              <button type="button" class="btn-cart">장바구니 담기</button>
+            </article>
+
+            <!-- 상품 5 -->
+            <article class="product">
+              <a
+                href="#"
+                class="product-thumb"
+                aria-label="떡메모지 100매 자세히 보기"
+              >
+                <span class="art art-memo"></span>
+              </a>
+              <div class="product-info">
+                <h3 class="product-name"><a href="#">떡메모지 100매</a></h3>
+                <p class="product-desc">한 장씩 깔끔하게 떼어져요</p>
+                <p class="product-price">3,000원</p>
+              </div>
+              <button type="button" class="btn-cart">장바구니 담기</button>
+            </article>
+
+            <!-- 상품 6 -->
+            <article class="product">
+              <a
+                href="#"
+                class="product-thumb"
+                aria-label="마스킹테이프 2롤 자세히 보기"
+              >
+                <span class="art art-tape"></span>
+              </a>
+              <div class="product-info">
+                <h3 class="product-name"><a href="#">마스킹테이프 2롤</a></h3>
+                <p class="product-desc">손으로 쉽게 찢어지는 종이 테이프</p>
+                <p class="product-price">4,800원</p>
+              </div>
+              <button type="button" class="btn-cart">장바구니 담기</button>
+            </article>
+
+            <!-- 상품 7 (할인 상품) -->
+            <article class="product">
+              <a
+                href="#"
+                class="product-thumb"
+                aria-label="캔버스 펜 파우치 자세히 보기"
+              >
+                <span class="art art-pouch color-green"></span>
+                <span class="badge badge-sale">20% 할인</span>
+              </a>
+              <div class="product-info">
+                <h3 class="product-name"><a href="#">캔버스 펜 파우치</a></h3>
+                <p class="product-desc">펜 20자루가 들어가요</p>
+                <p class="product-price">
+                  <del>24,000원</del>
+                  <span class="sale">19,200원</span>
+                </p>
+              </div>
+              <button type="button" class="btn-cart">장바구니 담기</button>
+            </article>
+
+            <!-- 상품 8 -->
+            <article class="product">
+              <a
+                href="#"
+                class="product-thumb"
+                aria-label="2027 스프링 플래너 자세히 보기"
+              >
+                <span class="art art-notebook art-planner color-red"></span>
+                <span class="badge">새 상품</span>
+              </a>
+              <div class="product-info">
+                <h3 class="product-name"><a href="#">2027 스프링 플래너</a></h3>
+                <p class="product-desc">월간과 주간을 한 권에</p>
+                <p class="product-price">15,000원</p>
+              </div>
+              <button type="button" class="btn-cart">장바구니 담기</button>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========== 배송 안내 ========== -->
+      <section class="notice" aria-label="배송 안내">
+        <div class="container notice-inner">
+          <div class="notice-item">
+            <h3>오후 2시 전 주문은 오늘 출발</h3>
+            <p>평일 기준이며, 보통 1~2일 안에 받아요.</p>
+          </div>
+          <div class="notice-item">
+            <h3>5만 원 이상 무료배송</h3>
+            <p>그보다 적으면 배송비 3,000원이 붙어요.</p>
+          </div>
+          <div class="notice-item">
+            <h3>7일 안에 교환과 반품</h3>
+            <p>상품을 받은 날부터 7일 안에 신청하면 돼요.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========== 뉴스레터 ========== -->
+      <section class="newsletter">
+        <div class="container newsletter-inner">
+          <div>
+            <h2 class="section-title">새 상품 소식 받기</h2>
+            <p class="section-desc">
+              한 달에 한 번, 새로 들어온 문구만 모아서 보내 드려요.
+            </p>
+          </div>
+          <form class="newsletter-form" action="#">
+            <label for="email" class="sr-only">이메일 주소</label>
+            <input type="email" id="email" placeholder="이메일 주소" required />
+            <button type="submit" class="btn btn-primary">구독하기</button>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <!-- ========== 푸터 ========== -->
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <div class="footer-top">
+          <p class="logo">모눈상점</p>
+          <ul class="footer-links">
+            <li><a href="#">이용약관</a></li>
+            <li>
+              <a href="#"><strong>개인정보처리방침</strong></a>
+            </li>
+            <li><a href="#">고객센터</a></li>
+          </ul>
+        </div>
+        <p class="footer-info">
+          상호 모눈상점 | 대표 홍길동 | 사업자등록번호 000-00-00000<br />
+          고객센터 02-000-0000 (평일 10:00~17:00)
+        </p>
+        <p class="copyright">© 2026 모눈상점</p>
+      </div>
+    </footer>
+  </body>
+</html>

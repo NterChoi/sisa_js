@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>오늘 할 일</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css"
+    />
+    <!-- [수정] 시안의 실제 CSS 파일명에 맞게 연결합니다. 완성 앱은 index.html입니다. -->
+    <link rel="stylesheet" href="./index1.css" />
+  </head>
+  <body>
+    <main class="app">
+      <header class="head">
+        <p class="head__date" id="today"></p>
+        <h1 class="head__title">오늘 할 일</h1>
+        <p class="head__progress" id="progress-text"></p>
+        <div class="bar" aria-hidden="true">
+          <span class="bar__fill" id="progress-bar"></span>
+        </div>
+      </header>
+
+      <form class="add" id="form">
+        <input
+          class="add__input"
+          id="txt"
+          placeholder="할 일을 적고 Enter"
+          aria-label="할 일"
+          autocomplete="off"
+          maxlength="80"
+        />
+        <button class="add__btn" id="add" disabled>추가</button>
+      </form>
+
+      <div class="filters" id="filters" role="group" aria-label="목록 보기">
+        <button type="button" data-filter="all" aria-pressed="true">
+          전체
+        </button>
+        <button type="button" data-filter="active" aria-pressed="false">
+          남은 일
+        </button>
+        <button type="button" data-filter="done" aria-pressed="false">
+          끝낸 일
+        </button>
+      </div>
+
+      <!-- JS 가 li 를 이 모양으로 만든다
+      <li class="item done" data-id="1">
+        <label class="item__label">
+          <input class="item__check" type="checkbox" checked>
+          <span class="item__text">할 일 글자</span>
+        </label>
+        <button class="item__del" type="button" aria-label="할 일 글자 삭제">✕</button>
+      </li>
+    -->
+      <ul class="list" id="list"></ul>
+
+      <div class="empty" id="empty" hidden>
+        <p class="empty__title" id="empty-title"></p>
+        <p class="empty__sub" id="empty-sub"></p>
+      </div>
+
+      <footer class="foot">
+        <button class="foot__clear" id="clear" type="button" disabled>
+          끝낸 일 지우기
+        </button>
+      </footer>
+    </main>
+
+    <!-- [수정] 존재하지 않는 app.js 연결 제거: 이 파일은 정적 시안입니다. -->
+    <p style="text-align: center; margin-top: 20px"><a href="./index.html">완성된 할 일 앱 열기</a></p>
+  </body>
+</html>

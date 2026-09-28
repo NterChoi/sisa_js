@@ -1,0 +1,58 @@
+<!doctype html>
+<!-- [수정] 한국어 페이지와 문서 제목을 지정합니다. -->
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>오늘 할 일</title>
+    <script type="module" src="./index.js" defer></script>
+    <!-- [수정] 외부 reset.css 의존성은 index.css의 기본 스타일로 대체했습니다. -->
+    <link rel="stylesheet" href="./index.css" />
+  </head>
+  <body>
+    <div class="app">
+      <header class="head">
+        <div class="header__wrapper">
+          <p class="head__date"></p>
+          <h1 class="head__title">오늘 할 일</h1>
+        </div>
+        <div class="progressWrapper">
+          <!-- [추가] 완료 개수 변경을 보조 기기에도 알립니다. -->
+          <span class="head__progress" aria-live="polite">적어둔 일이 없어요</span>
+          <progress class="bar" max="1" value="0" aria-label="할 일 완료 진행률"></progress>
+        </div>
+
+      </header>
+      <div>
+        <!-- [수정] form으로 감싸 Enter와 추가 버튼 모두 제출 이벤트를 사용합니다. -->
+        <form class="input__wrapper">
+          <input
+            class="add__input"
+            type="text"
+            placeholder="할 일을 적고 Enter"
+            aria-label="할 일"
+            autocomplete="off"
+            maxlength="80"
+          />
+          <button type="submit" class="add__btn" disabled>추가</button>
+        </form>
+      </div>
+      <main>
+        <!-- [수정] data-filter로 JS 필터 상태와 연결합니다. -->
+        <div class="filters" role="group" aria-label="목록 보기">
+          <button type="button" data-filter="all" class="filters__all" aria-pressed="true">전체</button>
+          <button type="button" data-filter="active" aria-pressed="false" class="filters__todo">남은 일</button>
+          <button type="button" data-filter="done" aria-pressed="false" class="filters__done">끝낸 일</button>
+        </div>
+        <!-- [수정] 목록과 빈 상태의 li는 render.js에서 생성합니다. -->
+        <ul class="list" id="list" aria-label="할 일 목록"></ul>
+        <!-- [추가] 저장 실패 시 사용자에게 이유를 안내합니다. -->
+        <p class="status" role="status"></p>
+
+        <footer class="foot">
+          <button class="foot__clear" type="button" disabled>끝낸 일 지우기</button>
+        </footer>
+      </main>
+    </div>
+  </body>
+</html>
