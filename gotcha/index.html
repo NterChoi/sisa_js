@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>디지몬 가챠</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="./gotcha.js" defer></script>
+  </head>
+  <body>
+    <main class="gacha">
+      <header class="gacha__header">
+        <h1 class="gacha__title">🎁 디지몬 가챠</h1>
+
+        <p class="collection">
+          도감 <strong id="collection-count">0</strong> /
+          <span id="collection-total">전체</span>
+        </p>
+      </header>
+
+      <section class="gacha__stage" aria-label="디지몬 뽑기 화면">
+        <!-- 뽑기 전 디지바이스 -->
+        <img
+          class="digivice"
+          id="digivice"
+          src="./images/digivice1.webp"
+          alt="디지바이스"
+        />
+
+        <!-- JS에서 src를 넣고 hidden을 제거하면 결과 이미지 표시 -->
+        <img
+          class="gacha__result"
+          id="digimon-image"
+          alt="뽑은 디지몬"
+          hidden
+        />
+      </section>
+
+      <div class="gacha__info" aria-live="polite">
+        <h2 class="gacha__name" id="digimon-name" hidden></h2>
+        <p class="gacha__message" id="gacha-message">
+          디지바이스를 작동해 보세요
+        </p>
+      </div>
+
+      <button class="gacha__button" id="draw-button" type="button">뽑기</button>
+    </main>
+  </body>
+</html>
