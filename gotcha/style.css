@@ -120,8 +120,15 @@ button {
   text-align: center;
 }
 
+.gacha__level {
+  margin: 0 0 6px;
+  font-size: 25px;
+  font-weight: 800;
+  color: #666;
+}
+
 .gacha__name {
-  font-size: 30px;
+  font-size: 45px;
   font-weight: 800;
 }
 
@@ -165,26 +172,6 @@ button {
 .gacha__button:disabled {
   background: #f4a1a3;
   cursor: wait;
-}
-
-/* JS에서 뽑는 동안 stage에 is-drawing 클래스 추가 */
-.gacha__stage.is-drawing .digivice {
-  animation: shake 350ms ease-in-out infinite;
-}
-
-@keyframes shake {
-  0%,
-  100% {
-    transform: translateY(0) rotate(0deg);
-  }
-
-  25% {
-    transform: translateY(-6px) rotate(-5deg);
-  }
-
-  75% {
-    transform: translateY(-6px) rotate(5deg);
-  }
 }
 
 /* 작은 화면 */
@@ -246,5 +233,178 @@ button {
 
   .gacha__button {
     transition: none;
+  }
+}
+
+/* 빛 효과가 무대 안에 겹쳐지도록 설정 */
+.gacha__stage {
+  position: relative;
+  isolation: isolate;
+}
+
+.digivice,
+.gacha__result {
+  position: relative;
+  z-index: 1;
+}
+
+/* 빛 효과의 기본 상태 */
+.gacha__stage::before,
+.gacha__stage::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+  opacity: 0;
+}
+
+/* 디지바이스 화면에서 위로 솟는 빛기둥 */
+.gacha__stage::before {
+  z-index: 2;
+  left: 50%;
+  bottom: 50%;
+  width: 150px;
+  height: 75%;
+
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgb(0 221 255 / 25%) 12%,
+    #7df9ff 30%,
+    #fff 43%,
+    #fff 57%,
+    #7df9ff 70%,
+    rgb(0 221 255 / 25%) 88%,
+    transparent 100%
+  );
+
+  /* 위는 넓고, 화면에 닿는 아래쪽은 좁게 */
+  clip-path: polygon(0 0, 100% 0, 72% 100%, 28% 100%);
+  filter: blur(5px);
+  transform: translateX(-50%) scaleY(0);
+  transform-origin: center bottom;
+}
+
+/* 화면 중심의 눈부신 흰빛 */
+.gacha__stage::after {
+  z-index: 3;
+  left: 50%;
+  top: 50%;
+  width: 190px;
+  height: 150px;
+
+  background: radial-gradient(
+    ellipse,
+    #fff 0%,
+    #fff 18%,
+    #caffff 32%,
+    rgb(0 229 255 / 65%) 48%,
+    transparent 72%
+  );
+
+  filter: blur(8px);
+  transform: translate(-50%, -50%) scale(0.5);
+}
+
+/* 뽑기 중: 어두운 배경 */
+.gacha__stage.is-drawing {
+  background: radial-gradient(
+    ellipse at center,
+    #123953 0%,
+    #07152e 50%,
+    #020510 100%
+  );
+}
+
+/* 기기는 흔들지 않고 빛만 입힘 */
+.gacha__stage.is-drawing .digivice {
+  animation: none;
+  filter: brightness(1.2) drop-shadow(0 0 18px rgb(69 238 255 / 65%));
+}
+
+.gacha__stage.is-drawing::before {
+  animation:
+    beam-rise 600ms ease-out forwards,
+    beam-flow 1200ms ease-in-out 600ms infinite;
+}
+
+.gacha__stage.is-drawing::after {
+  animation: screen-glow 1500ms ease-in-out infinite alternate;
+}
+
+/* 빛기둥이 위로 자람 */
+@keyframes beam-rise {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) scaleX(0.4) scaleY(0);
+  }
+
+  to {
+    opacity: 0.9;
+    transform: translateX(-50%) scaleX(1) scaleY(1);
+  }
+}
+
+/* 빛기둥의 폭과 밝기가 천천히 변함 */
+@keyframes beam-flow {
+  0%,
+  100% {
+    opacity: 0.9;
+    transform: translateX(-50%) scaleX(1) scaleY(1);
+  }
+
+  50% {
+    opacity: 1;
+    transform: translateX(-50%) scaleX(1.2) scaleY(1);
+  }
+}
+
+@keyframes screen-glow {
+  from {
+    opacity: 0.6;
+    transform: translate(-50%, -50%) scale(0.65);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.3);
+  }
+}
+
+/* 결과가 나올 때 남은 흰빛이 퍼지며 사라짐 */
+.gacha__stage.is-revealing::after {
+  animation: reveal-light 700ms ease-out forwards;
+}
+
+@keyframes reveal-light {
+  from {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(5);
+  }
+
+  to {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.8);
+  }
+}
+
+/* 움직임 줄이기 설정에서는 고정된 빛으로 표시 */
+@media (prefers-reduced-motion: reduce) {
+  .gacha__stage.is-drawing::before,
+  .gacha__stage.is-drawing::after {
+    animation: none;
+    opacity: 0.8;
+  }
+
+  .gacha__stage.is-drawing::before {
+    transform: translateX(-50%) scale(1);
+  }
+
+  .gacha__stage.is-drawing::after {
+    transform: translate(-50%, -50%);
+  }
+
+  .gacha__stage.is-revealing::after {
+    animation: none;
+    opacity: 0;
   }
 }

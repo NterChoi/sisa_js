@@ -13,7 +13,7 @@
         <h1 class="gacha__title">🎁 디지몬 가챠</h1>
 
         <p class="collection">
-          도감 <strong id="collection-count">0</strong> /
+          도감 <strong id="collection-count"></strong> /
           <span id="collection-total"></span>
         </p>
       </header>
@@ -37,10 +37,9 @@
       </section>
 
       <div class="gacha__info" aria-live="polite">
+        <p class="gacha__level" id="digimon-level" hidden></p>
         <h2 class="gacha__name" id="digimon-name" hidden></h2>
-        <p class="gacha__message" id="gacha-message">
-          디지바이스를 작동해 보세요
-        </p>
+        <p class="gacha__message" id="gacha-message">디지몬 진화!</p>
       </div>
 
       <button class="gacha__button" id="draw-button" type="button">뽑기</button>

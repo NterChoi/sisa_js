@@ -1,0 +1,19 @@
+.button {
+  padding: 5px 10px;
+  border-radius: 10px;
+  background-color: transparent;
+  border: 1px solid red;
+}
+.button:hover {
+  background-color: red;
+}
+
+.activated {
+  background-color: black;
+  border: 1px solid black;
+  color: white;
+}
+
+.activated:hover {
+  background-color: black;
+}
